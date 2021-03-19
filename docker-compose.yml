@@ -13,13 +13,13 @@ services:
   platypus_mysql_db:
     image: mysql:5.7
     ports:
-      - '3306:3306'
+      - '3307:3306'
     volumes:
       - platypus-db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: platypus
-      MYSQL_USER: user
+      MYSQL_DATABASE: platypus_dev
+      MYSQL_USER: root
       MYSQL_PASSWORD: password
     networks:
       - duckpond
