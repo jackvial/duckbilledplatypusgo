@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "db-migrate-mysql": "^2.1.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
   }
