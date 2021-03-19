@@ -12,8 +12,9 @@ version: '3'
 services:
   platypus_mysql_db:
     image: mysql:5.7
+    restart: always
     ports:
-      - '3307:3306'
+      - '3306:3306'
     volumes:
       - platypus-db-data:/var/lib/mysql
     environment:
@@ -25,6 +26,7 @@ services:
       - duckpond
 
   platypus_web:
+    restart: always
     build:
       context: ./web
       dockerfile: Dockerfile
