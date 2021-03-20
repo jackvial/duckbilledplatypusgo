@@ -1,12 +1,13 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "rollup --config"
+    "build": "rollup --config",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +16,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
-  }
+  },
+  "devDependencies": {}
 }
