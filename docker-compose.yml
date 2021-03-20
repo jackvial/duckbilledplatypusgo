@@ -1,0 +1,45 @@
+version: '3'
+
+# Run as
+# docker-compose build; docker-compose up -d
+# Check with
+# docker ps
+# Then check the logs with
+# docker logs --tail 50 $service_name
+# docker-compose images
+# docker-compose logs --tail 20 $service_name
+
+services:
+  platypus_mysql_db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - platypus-db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: platypus_dev
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    networks:
+      - duckpond
+
+  platypus_web:
+    restart: always
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    # environment:
+    ports:
+      - '8080:8080'
+    depends_on:
+      - platypus_mysql_db
+    networks:
+      - duckpond
+
+volumes:
+  platypus-db-data:
+networks:
+  duckpond:
+    driver: bridge
