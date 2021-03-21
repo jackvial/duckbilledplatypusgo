@@ -7,7 +7,7 @@ const SearchApp = () => {
     return `<div class="list-item">
                 <b>Answer:</b> ${item.answer} 
                 <br>
-                <span class="text-sm"><b>Match: </b>${(
+                <span class="text-sm text-gray-400"><b>Match: </b>${(
                   item.score * 100
                 ).toFixed(1)}%</span>
             </div>`;
