@@ -37,6 +37,17 @@ services:
       - platypus_mysql_db
     networks:
       - duckpond
+  
+  platypus_inference:
+    build:
+      context: ./inference
+      dockerfile: Dockerfile
+    ports:
+      - '81:80'
+    volumes:
+      - ./inference/app/distilbert-base-uncased-distilled-squad:/models/distilbert-base-uncased-distilled-squad
+    networks:
+      - duckpond
 
 volumes:
   platypus-db-data:
