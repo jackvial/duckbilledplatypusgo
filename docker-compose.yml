@@ -24,17 +24,44 @@ services:
       MYSQL_PASSWORD: password
     networks:
       - duckpond
+   
+  #Nginx Service
+  platypus_nginx:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+       - ./web/app:/var/www
+      - ./docker_configs/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - duckpond
 
   platypus_web:
-    restart: always
+    container_name: app
+    restart: unless-stopped
+    tty: true
     build:
+      args:
+        uid: 1001
+        user: webadmin
       context: ./web
       dockerfile: Dockerfile
-    # environment:
-    ports:
-      - '8080:8080'
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
     depends_on:
       - platypus_mysql_db
+    # environment:
+    # ports:
+    #   - '8080:8080'
+    working_dir: /var/www
+    volumes:
+      - ./web/app:/var/www
+      - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond
   
