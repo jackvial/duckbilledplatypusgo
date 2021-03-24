@@ -1,1 +1,3 @@
 web/app/node_modules
+inference/app/distilbert-base-uncased-distilled-squad
+.vscode
