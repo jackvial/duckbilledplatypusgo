@@ -28,20 +28,21 @@ services:
   #Nginx Service
   platypus_nginx:
     image: nginx:alpine
-    container_name: webserver
+    container_name: platypus_nginx
     restart: unless-stopped
     tty: true
     ports:
       - "80:80"
       - "443:443"
     volumes:
-       - ./web/app:/var/www
+      - ./web/app:/var/www
       - ./docker_configs/conf.d/:/etc/nginx/conf.d/
     networks:
       - duckpond
+      
 
   platypus_web:
-    container_name: app
+    container_name: platypus_web
     restart: unless-stopped
     tty: true
     build:
@@ -70,7 +71,7 @@ services:
       context: ./inference
       dockerfile: Dockerfile
     ports:
-      - '81:80'
+      - '86:86'
     volumes:
       - ./inference/app/distilbert-base-uncased-distilled-squad:/models/distilbert-base-uncased-distilled-squad
     networks:
