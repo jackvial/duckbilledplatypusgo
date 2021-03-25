@@ -71,7 +71,7 @@ services:
       context: ./inference
       dockerfile: Dockerfile
     ports:
-      - '86:86'
+      - '86:80'
     volumes:
       - ./inference/app/distilbert-base-uncased-distilled-squad:/models/distilbert-base-uncased-distilled-squad
     networks:
