@@ -72,6 +72,7 @@ def span_to_answer(tokenizer, text: str, start: int, end: int):
         "end": min(len(text), char_end_idx),
     }
 
+
 def run_qa_inference(context, question):
     inputs = qa_tokenizer.encode_plus(
         question, context, add_special_tokens=True, return_tensors="pt"
@@ -80,7 +81,7 @@ def run_qa_inference(context, question):
     # print("input_ids: ", input_ids)
     text_tokens = qa_tokenizer.convert_ids_to_tokens(input_ids)
     # print("text_tokens: ", text_tokens)
-    
+
     # print("len(context.split()): ", len(context.split(" ")))
     # print("len(input_ids): ", len(input_ids))
     # print("len(text_tokens): ", len(text_tokens))
@@ -91,9 +92,9 @@ def run_qa_inference(context, question):
     # Get the most likely beginning and end of answer with the argmax of the predictions
     answer_start = torch.argmax(answer_start_preds)
     answer_end = torch.argmax(answer_end_preds) + 1
-    
+
     # print("ids to tokens: ", qa_tokenizer.convert_ids_to_tokens(input_ids[answer_start:answer_end]))
-    
+
     answer = qa_tokenizer.convert_tokens_to_string(
         qa_tokenizer.convert_ids_to_tokens(input_ids[answer_start:answer_end])
     )
@@ -115,9 +116,18 @@ def run_qa_inference(context, question):
 async def predict(model_input: ModelInput):
     return {
         "results": list(
-            map(
-                functools.partial(run_qa_inference, question=model_input.question),
-                model_input.contexts,
+            filter(
+                lambda x: x["score"] > 0.8,
+                sorted(
+                    map(
+                        functools.partial(
+                            run_qa_inference, question=model_input.question
+                        ),
+                        model_input.contexts,
+                    ),
+                    key=lambda x: x["score"],
+                    reverse=True,
+                ),
             )
         )
     }
