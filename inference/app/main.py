@@ -23,6 +23,8 @@ qa_model = AutoModelForQuestionAnswering.from_pretrained(
     "/models/distilbert-base-uncased-distilled-squad"
 )
 
+ANSWER_SCORE_THRESHOLD = 0.8
+
 
 class ModelInput(BaseModel):
     contexts: List[str]
@@ -117,7 +119,7 @@ async def predict(model_input: ModelInput):
     return {
         "results": list(
             filter(
-                lambda x: x["score"] > 0.8,
+                lambda x: x["score"] > ANSWER_SCORE_THRESHOLD,
                 sorted(
                     map(
                         functools.partial(
