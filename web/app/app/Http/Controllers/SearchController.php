@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Article;
+use DB;
 
 class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $contexts = Article::all()->map(function($item) {
+        $contexts = collect(DB::select(DB::raw("SELECT * from articles WHERE MATCH(body) AGAINST (?);"), [
+            $request->q
+        ]))->map(function($item) {
             return $item->body;
         });
         $response = Http::post('http://platypus_inference/predict', [
