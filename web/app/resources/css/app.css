@@ -1,0 +1,47 @@
+/* ./resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap");
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+#logo {
+    width: 220px;
+}
+
+#brand-name {
+    margin-top: 0px;
+    font-size: 24px;
+}
+
+.list-item {
+    border: 1px solid #282828;
+    border-radius: 8px;
+    background: #282828;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 50%);
+    color: #cccccc;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+.search-input-group {
+    @apply relative text-gray-200 focus-within:text-gray-400;
+}
+
+.search-input {
+    @apply w-full py-2 text-sm text-white bg-gray-600 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900;
+}
+
+.search-input-addon {
+    @apply absolute inset-y-0 right-0 flex items-center pl-2;
+}
+
+/* .search-btn {
+    @apply p-1 focus:outline-none focus:shadow-outline;
+} */

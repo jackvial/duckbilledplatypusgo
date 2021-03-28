@@ -1,22 +1,23 @@
 {
-  "name": "app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "rollup --config",
-    "tsc": "tsc"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "db-migrate-mysql": "^2.1.2",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "superagent": "^6.1.0"
-  },
-  "devDependencies": {}
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.2.5",
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.2.8",
+        "tailwindcss": "^2.0.4"
+    },
+    "dependencies": {
+        "postcss-import": "^14.0.0"
+    }
 }
