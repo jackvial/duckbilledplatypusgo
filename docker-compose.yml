@@ -26,19 +26,19 @@ services:
       - duckpond
    
   #Nginx Service
-  platypus_nginx:
-    image: nginx:alpine
-    container_name: platypus_nginx
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./web/app:/var/www
-      - ./docker_configs/conf.d/:/etc/nginx/conf.d/
-    networks:
-      - duckpond
+  # platypus_nginx:
+  #   image: nginx:alpine
+  #   container_name: platypus_nginx
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./web/app:/var/www
+  #     - ./docker_configs/conf.d/:/etc/nginx/conf.d/
+  #   networks:
+  #     - duckpond
       
 
   platypus_web:
@@ -56,15 +56,18 @@ services:
       SERVICE_TAGS: dev
     depends_on:
       - platypus_mysql_db
+    ports:
+      - '80:8000'
     # environment:
     # ports:
     #   - '8080:8080'
-    working_dir: /var/www
+    # working_dir: /var/www
     volumes:
-      - ./web/app:/var/www
+      # - ./web/app:/var/www
       - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond
+    command: bash -c " cd /var/www && php artisan serve --host 0.0.0.0"
   
   platypus_inference:
     build:
