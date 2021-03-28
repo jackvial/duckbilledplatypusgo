@@ -30,3 +30,11 @@ COPY ./app /app
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
+
+# Important to set this correctly so you don't run out of memory.
+# When running a model server the model is loaded into memory for each worker.
+# if your model is 500mb and you are running 6 workers then you will be using 3gb of ram.
+# Set to 1 to begin with a keep an eye on your metrics to see if it needs to be increased
+# and if you need to move to larger servers.
+ENV MAX_WORKERS="1"
+ENV WEB_CONCURRENCY="1"
