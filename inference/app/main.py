@@ -82,7 +82,10 @@ def run_qa_inference(context, question):
     input_ids = inputs["input_ids"].tolist()[0]
     # print("input_ids: ", input_ids)
     text_tokens = qa_tokenizer.convert_ids_to_tokens(input_ids)
-    # print("text_tokens: ", text_tokens)
+    print("text_tokens: ", text_tokens)
+    print("qa_tokenizer.convert_tokens_to_string(text_tokens): ", qa_tokenizer.convert_tokens_to_string(text_tokens))
+    print("join text tokens: ", " ".join(text_tokens).replace(" ##", "").strip())
+    
 
     # print("len(context.split()): ", len(context.split(" ")))
     # print("len(input_ids): ", len(input_ids))
@@ -100,7 +103,7 @@ def run_qa_inference(context, question):
     answer = qa_tokenizer.convert_tokens_to_string(
         qa_tokenizer.convert_ids_to_tokens(input_ids[answer_start:answer_end])
     )
-    # print("qa_tokenizer.word_to_chars(input_ids[answer_start:answer_end]): ", qa_tokenizer.word_to_chars(input_ids[answer_start:answer_end]))
+    # print("qa_tokenizer.words_to_chars(input_ids[answer_start:answer_end]): ", qa_tokenizer.words_to_chars(input_ids[answer_start:answer_end]))
     # print("input_ids[answer_start]: ", input_ids[answer_start])
     # print("input_ids[answer_end]: ", input_ids[answer_end])
     # print("span_to_answer: ", span_to_answer(qa_tokenizer, context, answer_start, answer_end))
