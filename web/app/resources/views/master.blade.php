@@ -8,9 +8,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link href="/styles.css" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -19,15 +17,15 @@
       <img src="platypus_logo.png" id="logo" />
       <h1 id="brand-name">DuckBilledPlatypusGo</h1>
       <form method="GET" class="mt-4 w-full">
-        <div class="relative text-gray-200 focus-within:text-gray-400">
+        <div class="search-input-group">
           <input
             id="search-input"
             type="text"
             name="q"
             placeholder="Search..."
             autocomplete="off"
-            class="w-full py-2 text-sm text-white bg-gray-600 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900">
-          <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+            class="search-input">
+          <span class="search-input-addon">
             <button
               id="search-button"
               type="button"

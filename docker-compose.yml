@@ -24,26 +24,57 @@ services:
       MYSQL_PASSWORD: password
     networks:
       - duckpond
+   
+  #Nginx Service
+  # platypus_nginx:
+  #   image: nginx:alpine
+  #   container_name: platypus_nginx
+  #   restart: unless-stopped
+  #   tty: true
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./web/app:/var/www
+  #     - ./docker_configs/conf.d/:/etc/nginx/conf.d/
+  #   networks:
+  #     - duckpond
+      
 
   platypus_web:
-    restart: always
+    container_name: platypus_web
+    restart: unless-stopped
+    tty: true
     build:
+      args:
+        uid: 1001
+        user: webadmin
       context: ./web
       dockerfile: Dockerfile
-    # environment:
-    ports:
-      - '8080:8080'
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
     depends_on:
       - platypus_mysql_db
+    ports:
+      - '80:8000'
+    # environment:
+    # ports:
+    #   - '8080:8080'
+    # working_dir: /var/www
+    volumes:
+      # - ./web/app:/var/www
+      - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond
+    command: bash -c " cd /var/www && php artisan serve --host 0.0.0.0"
   
   platypus_inference:
     build:
       context: ./inference
       dockerfile: Dockerfile
     ports:
-      - '81:80'
+      - '86:80'
     volumes:
       - ./inference/app/distilbert-base-uncased-distilled-squad:/models/distilbert-base-uncased-distilled-squad
     networks:
