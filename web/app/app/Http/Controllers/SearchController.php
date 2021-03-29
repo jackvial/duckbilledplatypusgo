@@ -16,7 +16,7 @@ class SearchController extends Controller
         ]))->map(function($item) {
             return $item->body;
         });
-        $response = Http::post('http://platypus_inference/predict', [
+        $response = Http::post(env('QA_INFERENCE_HOST') . '/predict', [
             'question' => $request->q,
             'contexts' => $contexts,
         ]);
