@@ -1,2 +1,3 @@
 # Duck Billed Platypus Go
-A Search Engine for Environmentalism
+
+Answers to all your Platypus questions.
