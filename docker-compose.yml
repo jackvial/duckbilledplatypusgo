@@ -67,7 +67,7 @@ services:
       - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond
-    command: bash -c " cd /var/www && php artisan serve --host 0.0.0.0"
+    command: bash -c " cd /var/www && php artisan migrate && php artisan serve --host 0.0.0.0"
   
   platypus_inference:
     build:
