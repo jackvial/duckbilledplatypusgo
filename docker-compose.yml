@@ -63,7 +63,7 @@ services:
     #   - '8080:8080'
     # working_dir: /var/www
     volumes:
-      # - ./web/app:/var/www
+      - ./web/app:/var/www
       - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond

@@ -12,7 +12,7 @@ body {
 }
 
 #logo {
-    width: 220px;
+    width: 180px;
 }
 
 #brand-name {
@@ -35,13 +35,9 @@ body {
 }
 
 .search-input {
-    @apply w-full py-2 text-sm text-white bg-gray-600 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900;
+    @apply w-full py-2 text-sm text-white bg-gray-600 rounded-md pl-10 focus:outline-none;
 }
 
 .search-input-addon {
-    @apply absolute inset-y-0 right-0 flex items-center pl-2;
+    @apply absolute inset-y-0 right-0 flex items-center pl-2 rounded-r-md;
 }
-
-/* .search-btn {
-    @apply p-1 focus:outline-none focus:shadow-outline;
-} */
