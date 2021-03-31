@@ -1,14 +1,5 @@
 version: '3'
 
-# Run as
-# docker-compose build; docker-compose up -d
-# Check with
-# docker ps
-# Then check the logs with
-# docker logs --tail 50 $service_name
-# docker-compose images
-# docker-compose logs --tail 20 $service_name
-
 services:
   platypus_mysql_db:
     image: mysql:5.7
@@ -21,25 +12,11 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: platypus_dev
       MYSQL_USER: root
+      
+      # This is only for local development 😅
       MYSQL_PASSWORD: password
     networks:
       - duckpond
-   
-  #Nginx Service
-  # platypus_nginx:
-  #   image: nginx:alpine
-  #   container_name: platypus_nginx
-  #   restart: unless-stopped
-  #   tty: true
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ./web/app:/var/www
-  #     - ./docker_configs/conf.d/:/etc/nginx/conf.d/
-  #   networks:
-  #     - duckpond
-      
 
   platypus_web:
     container_name: platypus_web
@@ -58,13 +35,8 @@ services:
       - platypus_mysql_db
     ports:
       - '80:8000'
-    # environment:
-    # ports:
-    #   - '8080:8080'
-    # working_dir: /var/www
     volumes:
       - ./web/app:/var/www
-      - ./docker_configs/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - duckpond
     command: bash -c " cd /var/www && php artisan migrate && php artisan serve --host 0.0.0.0"
