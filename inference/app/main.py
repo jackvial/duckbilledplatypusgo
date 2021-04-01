@@ -23,7 +23,7 @@ qa_model = AutoModelForQuestionAnswering.from_pretrained(
     "/models/distilbert-base-uncased-distilled-squad"
 )
 
-ANSWER_SCORE_THRESHOLD = 0.9
+ANSWER_SCORE_THRESHOLD = 0.95
 
 class ModelInput(BaseModel):
     contexts: List[str]

@@ -16,7 +16,7 @@ class SearchController extends Controller
             env('SEARCH_LIMIT', 10),
         ]))->map(function($item) {
             return $item->body;
-        })->take(env('TAKE_N_RESULTS', 5));
+        });
         $response = Http::post(env('QA_INFERENCE_HOST') . '/predict', [
             'question' => $request->q,
             'contexts' => $contexts,
